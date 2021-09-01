@@ -9,7 +9,7 @@ When `DB::Put` is called, the data is written to both memtable (to be flushed to
 
 ### How much is the gain?
 
-Using `::FlushWAL` API along with setting `DBOptions.concurrent_prepare`, MyRocks achieves 40% higher throughput in Sysbench's [update-nonindex](https://github.com/akopytov/sysbench/blob/master/src/lua/oltp_update_non_index.lua) benchmark.
+Using `::FlushWAL` API along with setting `DBOptions.concurrent_prepare`, MyRocks achieves 40% higher throughput in Sysbench's [update-nonindex](https://github.com/akopytov/sysbench/blob/main/src/lua/oltp_update_non_index.lua) benchmark.
 
 ### Write, Flush, and Sync
 
