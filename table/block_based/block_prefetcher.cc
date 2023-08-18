@@ -43,7 +43,8 @@ void BlockPrefetcher::PrefetchIfNeeded(
     rep->CreateFilePrefetchBufferIfNotExists(
         compaction_readahead_size_, compaction_readahead_size_,
         &prefetch_buffer_, /*implicit_auto_readahead=*/false,
-        /*num_file_reads=*/0, /*num_file_reads_for_auto_readahead=*/0);
+        /*num_file_reads=*/0, /*num_file_reads_for_auto_readahead=*/0,
+        /*upper_bound_offset=*/0);
     return;
   }
 
@@ -52,7 +53,7 @@ void BlockPrefetcher::PrefetchIfNeeded(
     rep->CreateFilePrefetchBufferIfNotExists(
         readahead_size, readahead_size, &prefetch_buffer_,
         /*implicit_auto_readahead=*/false, /*num_file_reads=*/0,
-        /*num_file_reads_for_auto_readahead=*/0);
+        /*num_file_reads_for_auto_readahead=*/0, upper_bound_offset_);
     return;
   }
 
@@ -76,7 +77,8 @@ void BlockPrefetcher::PrefetchIfNeeded(
         initial_auto_readahead_size_, max_auto_readahead_size,
         &prefetch_buffer_, /*implicit_auto_readahead=*/true,
         /*num_file_reads=*/0,
-        rep->table_options.num_file_reads_for_auto_readahead);
+        rep->table_options.num_file_reads_for_auto_readahead,
+        upper_bound_offset_);
     return;
   }
 
@@ -106,7 +108,8 @@ void BlockPrefetcher::PrefetchIfNeeded(
     rep->CreateFilePrefetchBufferIfNotExists(
         initial_auto_readahead_size_, max_auto_readahead_size,
         &prefetch_buffer_, /*implicit_auto_readahead=*/true, num_file_reads_,
-        rep->table_options.num_file_reads_for_auto_readahead);
+        rep->table_options.num_file_reads_for_auto_readahead,
+        upper_bound_offset_);
     return;
   }
 
@@ -125,7 +128,8 @@ void BlockPrefetcher::PrefetchIfNeeded(
     rep->CreateFilePrefetchBufferIfNotExists(
         initial_auto_readahead_size_, max_auto_readahead_size,
         &prefetch_buffer_, /*implicit_auto_readahead=*/true, num_file_reads_,
-        rep->table_options.num_file_reads_for_auto_readahead);
+        rep->table_options.num_file_reads_for_auto_readahead,
+        upper_bound_offset_);
     return;
   }
 

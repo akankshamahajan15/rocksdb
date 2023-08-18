@@ -1537,8 +1537,6 @@ struct ReadOptions {
   // broken, stale keys could be served in read paths.
   bool ignore_range_deletions = false;
 
-  // Experimental
-  //
   // If async_io is enabled, RocksDB will prefetch some of data asynchronously.
   // RocksDB apply it if reads are sequential and its internal automatic
   // prefetching.
@@ -1674,6 +1672,15 @@ struct ReadOptions {
   // no impact on point lookups.
   // Default: empty (every table will be scanned)
   std::function<bool(const TableProperties&)> table_filter;
+
+  // Experimental
+  //
+  // If auto_readahead_size is set to true, it will auto tune the readahead_size
+  // during scans internally.
+  // For this feature to enabled, iterate_upper_bound must also be specified.
+  //
+  // Default: false
+  bool auto_readahead_size = false;
 
   // *** END options only relevant to iterators or scans ***
 
